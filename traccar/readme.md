@@ -1,4 +1,4 @@
-#This is a Traccar with Mysql configured
+# This is a Traccar with Mysql configured
 
 Create a folder **/var/docker/traccar/logs** - to save the traccar log
 
