@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  traccar:
+    image: traccar/traccar
+    ports:
+      - "5027:5027"
+      - "8082:8082"
+      - "5055:5055"
+    volumes:
+      - /var/docker/traccar/logs:/opt/traccar/logs:rw
+      - ./traccar.xml:/opt/traccar/conf/traccar.xml:ro
+    links:
+      - mysql
+    networks:
+      - traccarnet
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: [DATABASE PASS]
+    volumes:
+      - /var/docker/traccar/mysql:/var/lib/mysql
+    networks:
+      - traccarnet
+networks:
+  traccarnet:
+    driver: "bridge"
